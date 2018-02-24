@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,16 @@ using Microsoft.Lync.Model.Conversation;
 using Polly;
 using Skypelogger.DomainModels;
 
+
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace Skypelogger.core
 {
     public class SkypeloggerManager
     {
         private static readonly Dictionary<Conversation, ConversationData> ActiveConversations = new Dictionary<Conversation, ConversationData>();
         private Self _myself;
-       
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         string GetConversationId()
         {
             throw new NotImplementedException();
@@ -56,7 +60,7 @@ namespace Skypelogger.core
 
         public void AddConversation(object sender, ConversationManagerEventArgs e)
         {
-            Console.WriteLine("Ny samtale");
+            Console.WriteLine($"Ny samtale med {e.Conversation.Participants[1].Contact.GetContactInformation(ContactInformationType.DisplayName)}");
             var conversationData = new ConversationData()
             {
                 Conversation = e.Conversation,
@@ -67,6 +71,8 @@ namespace Skypelogger.core
             ActiveConversations.Add(e.Conversation, conversationData);
             try
             {
+                log.Info($"{e.Conversation.Participants.FirstOrDefault().Contact.GetContactInformation(ContactInformationType.DisplayName)}");
+                //log.Info($"{e.Participant.Contact.GetContactInformation(ContactInformationType.DisplayName)}");
                 //using (StreamWriter outfile = new StreamWriter(appDataPath + programFolder + @"\nextConvId.txt", false))
                 //{
                 //    outfile.WriteLine(nextConvId);
@@ -85,7 +91,7 @@ namespace Skypelogger.core
         
         public void RemoveConversation(object sender, ConversationManagerEventArgs e)
         {
-            Console.WriteLine("Samtale lukket");
+            Console.WriteLine($"Samtale lukket {e.Conversation.Participants[1].Contact.GetContactInformation(ContactInformationType.DisplayName)}");
             string ConversationID = e.Conversation.Properties[ConversationProperty.Id].ToString();
             e.Conversation.ParticipantAdded -= AddParticipant;
             e.Conversation.ParticipantRemoved -= RemoveParticipant;
@@ -123,6 +129,8 @@ namespace Skypelogger.core
                     .InstantMessageReceived += InstantMessageReceived;
                 if (args.Participant.Contact == _myself.Contact)
                 {
+                    //TODO: Lagre meldingene
+                    //log.Info($"Messages recevied: {}");
                 }
             }
         }
