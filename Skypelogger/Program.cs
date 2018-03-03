@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Net.Http;
+using System.Text;
+using Skypelogger.Core;
 
 //Here is the once-per-application setup information
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
@@ -21,8 +24,7 @@ namespace Skypelogger
             labelProgramFolder.Text = mydocpath + programFolder;
             
             labelProgramFolder.Click += new EventHandler(OpenFolder);
-        }
-        
+        }     
 
         private void OpenFolder(object sender, EventArgs e)
         {
@@ -205,7 +207,7 @@ namespace Skypelogger
 
         private void Conversation_ParticipantRemoved(object sender, ParticipantCollectionChangedEventArgs args)
         {
-            (args.Participant.Modalities[ModalityTypes.InstantMessage] as InstantMessageModality).InstantMessageReceived -= InstantMessageModality_InstantMessageReceived;
+             (args.Participant.Modalities[ModalityTypes.InstantMessage] as InstantMessageModality).InstantMessageReceived -= InstantMessageModality_InstantMessageReceived;
             if (args.Participant.Contact == myself.Contact)
             {
                 log.Info("You were removed.");
@@ -234,8 +236,7 @@ namespace Skypelogger
             InstantMessageModality imm = (sender as InstantMessageModality);
             ConversationContainer container = ActiveConversations[imm.Conversation];
             DateTime now = DateTime.Now;
-            String convlog = "[" + now + "] (Conv. #" + container.m_convId + ") <" + imm.Participant.Contact.GetContactInformation(ContactInformationType.DisplayName) + ">";
-            convlog += Environment.NewLine + args.Text;
+            String convlog = "[" + now + "] (" + imm.Participant.Contact.GetContactInformation(ContactInformationType.DisplayName) + ") > " + args.Text;
             using (StreamWriter outfile = new StreamWriter(mydocpath + programFolder +@"\AllLyncIMHistory.txt", true))
             {
                 outfile.WriteLine(convlog);
@@ -246,16 +247,26 @@ namespace Skypelogger
                 if (participant.Contact == myself.Contact)
                     continue;
                 String directory = mydocpath + programFolder + @"\" + participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
+
                 if (!Directory.Exists(directory))
                     Directory.CreateDirectory(directory);
+
                 string dateString = now.ToString("yyyy-MM-dd");
                 String filename = directory + @"\" + dateString + ".txt";
                 //log.Info(filename);
+
                 using (StreamWriter partfile = new StreamWriter(filename, true))
                 {
                     partfile.WriteLine(convlog);
                     partfile.Close();
                 }
+
+                AzureFucntions azure = new AzureFucntions();
+                azure.SendMessage(
+                    convlog,
+                    participant.Contact.GetContactInformation(ContactInformationType.DisplayName).ToString()
+                        );
+                
             }
 
             log.Info(convlog);

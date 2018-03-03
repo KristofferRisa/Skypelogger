@@ -1,23 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
-using Polly;
-using Skypelogger.DomainModels;
 
-
-[assembly: log4net.Config.XmlConfigurator(Watch = true)]
-namespace Skypelogger.core
+//[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+namespace Skypelogger.Core
 {
     public class SkypeloggerManager
     {
         private static readonly Dictionary<Conversation, ConversationData> ActiveConversations = new Dictionary<Conversation, ConversationData>();
         private Self _myself;
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         string GetConversationId()
         {
@@ -71,7 +64,7 @@ namespace Skypelogger.core
             ActiveConversations.Add(e.Conversation, conversationData);
             try
             {
-                log.Info($"{e.Conversation.Participants.FirstOrDefault().Contact.GetContactInformation(ContactInformationType.DisplayName)}");
+                //log.Info($"{e.Conversation.Participants.FirstOrDefault().Contact.GetContactInformation(ContactInformationType.DisplayName)}");
                 //log.Info($"{e.Participant.Contact.GetContactInformation(ContactInformationType.DisplayName)}");
                 //using (StreamWriter outfile = new StreamWriter(appDataPath + programFolder + @"\nextConvId.txt", false))
                 //{
