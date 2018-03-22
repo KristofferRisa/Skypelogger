@@ -69,6 +69,7 @@ namespace Skypelogger
         private Label label1;
         private Label labelProgramFolder;
         private ToolStripMenuItem reconnectToolStripMenuItem;
+        private ToolStripMenuItem settingsToolStripMenuItem;
         private const int CONNECT_RETRY_MAX = -1; // -1 to retry indefinitely
         #endregion
 
@@ -261,7 +262,8 @@ namespace Skypelogger
                     partfile.Close();
                 }
 
-                AzureFucntions azure = new AzureFucntions();
+                //AzureFucntions azure = new AzureFucntions("https://functionappskypelogger.azurewebsites.net/api/AddConversation_v1?code=xlUxifmiAlp84Cqkgx2bdnOaw11EpVbetHlOR84Z5zWmxdq07DOlHA==");
+                AzureFucntions azure = new AzureFucntions("https://functionappskypelogger.azurewebsites.net/api/AddConversation_v2?code=lUZ4KdCT1oblL2u1zc6pgvCsRWRNpCqEFnMDOdyV62ralONkgmGALg==");
                 azure.SendMessage(
                     convlog,
                     participant.Contact.GetContactInformation(ContactInformationType.DisplayName).ToString()
@@ -295,140 +297,148 @@ namespace Skypelogger
 
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Program));
-            consoleBox = new TextBox();
-            notifyIcon = new NotifyIcon(components);
-            menuStrip1 = new MenuStrip();
-            fileToolStripMenuItem = new ToolStripMenuItem();
-            reconnectToolStripMenuItem = new ToolStripMenuItem();
-            configToolStripMenuItem = new ToolStripMenuItem();
-            exitToolStripMenuItem = new ToolStripMenuItem();
-            aboutToolStripMenuItem = new ToolStripMenuItem();
-            label1 = new Label();
-            label2 = new Label();
-            labelProgramFolder = new Label();
-            menuStrip1.SuspendLayout();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.consoleBox = new System.Windows.Forms.TextBox();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelProgramFolder = new System.Windows.Forms.Label();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // consoleBox
             // 
-            consoleBox.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom)
-            | AnchorStyles.Left)
-            | AnchorStyles.Right);
-            consoleBox.Location = new Point(12, 216);
-            consoleBox.Multiline = true;
-            consoleBox.Name = "consoleBox";
-            consoleBox.ReadOnly = true;
-            consoleBox.ScrollBars = ScrollBars.Vertical;
-            consoleBox.Size = new Size(669, 270);
-            consoleBox.TabIndex = 1;
-            consoleBox.TabStop = false;
+            this.consoleBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.consoleBox.Location = new System.Drawing.Point(12, 216);
+            this.consoleBox.Multiline = true;
+            this.consoleBox.Name = "consoleBox";
+            this.consoleBox.ReadOnly = true;
+            this.consoleBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.consoleBox.Size = new System.Drawing.Size(669, 270);
+            this.consoleBox.TabIndex = 1;
+            this.consoleBox.TabStop = false;
             // 
             // notifyIcon
             // 
-            notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
-            notifyIcon.BalloonTipText = "Skypelogger minimized";
-            notifyIcon.BalloonTipTitle = "Skypelogger";
-            notifyIcon.Icon = Icon;
-            notifyIcon.Text = "Skypelogger";
+            this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notifyIcon.BalloonTipText = "Skypelogger minimized";
+            this.notifyIcon.BalloonTipTitle = "Skypelogger";
+            this.notifyIcon.Icon = this.Icon;
+            this.notifyIcon.Text = "Skypelogger";
             // 
             // menuStrip1
             // 
-            menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] {
-            fileToolStripMenuItem,
-            aboutToolStripMenuItem});
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(693, 24);
-            menuStrip1.TabIndex = 2;
-            menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(693, 42);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
-            reconnectToolStripMenuItem,
-            configToolStripMenuItem,
-            exitToolStripMenuItem});
-            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(37, 20);
-            fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reconnectToolStripMenuItem,
+            this.configToolStripMenuItem,
+            this.settingsToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
+            this.fileToolStripMenuItem.Text = "File";
             // 
             // reconnectToolStripMenuItem
             // 
-            reconnectToolStripMenuItem.Name = "reconnectToolStripMenuItem";
-            reconnectToolStripMenuItem.Size = new Size(152, 22);
-            reconnectToolStripMenuItem.Text = "Reconnect";
-            reconnectToolStripMenuItem.Click += new EventHandler(reconnectToolStripMenuItem_Click);
+            this.reconnectToolStripMenuItem.Name = "reconnectToolStripMenuItem";
+            this.reconnectToolStripMenuItem.Size = new System.Drawing.Size(268, 38);
+            this.reconnectToolStripMenuItem.Text = "Reconnect";
+            this.reconnectToolStripMenuItem.Click += new System.EventHandler(this.reconnectToolStripMenuItem_Click);
             // 
             // configToolStripMenuItem
             // 
-            configToolStripMenuItem.Name = "configToolStripMenuItem";
-            configToolStripMenuItem.Size = new Size(152, 22);
-            configToolStripMenuItem.Text = "Hide";
-            configToolStripMenuItem.Click += new EventHandler(configToolStripMenuItem_Click);
+            this.configToolStripMenuItem.Enabled = false;
+            this.configToolStripMenuItem.Name = "configToolStripMenuItem";
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(268, 38);
+            this.configToolStripMenuItem.Text = "Hide";
+            this.configToolStripMenuItem.Click += new System.EventHandler(this.configToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
-            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(152, 22);
-            exitToolStripMenuItem.Text = "Exit";
-            exitToolStripMenuItem.Click += new EventHandler(exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(268, 38);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
-            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(52, 20);
-            aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 38);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Microsoft Sans Serif", 13F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 49);
-            label1.Name = "label1";
-            label1.Size = new Size(66, 22);
-            label1.TabIndex = 3;
-            label1.Text = "Folder:";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 39);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Folder:";
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Microsoft Sans Serif", 13F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(12, 90);
-            label2.Name = "label2";
-            label2.Size = new Size(133, 22);
-            label2.TabIndex = 4;
-            label2.Text = "Program folder:";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(257, 39);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Program folder:";
             // 
             // labelProgramFolder
             // 
-            labelProgramFolder.AutoSize = true;
-            labelProgramFolder.Cursor = Cursors.Hand;
-            labelProgramFolder.Font = new Font("Microsoft Sans Serif", 10F, (FontStyle.Italic | FontStyle.Underline), GraphicsUnit.Point, ((byte)(0)));
-            labelProgramFolder.Location = new Point(151, 95);
-            labelProgramFolder.Name = "labelProgramFolder";
-            labelProgramFolder.Size = new Size(46, 17);
-            labelProgramFolder.TabIndex = 5;
-            labelProgramFolder.Text = "label3";
+            this.labelProgramFolder.AutoSize = true;
+            this.labelProgramFolder.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelProgramFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelProgramFolder.Location = new System.Drawing.Point(280, 95);
+            this.labelProgramFolder.Name = "labelProgramFolder";
+            this.labelProgramFolder.Size = new System.Drawing.Size(86, 31);
+            this.labelProgramFolder.TabIndex = 5;
+            this.labelProgramFolder.Text = "label3";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(268, 38);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // Program
             // 
-            ClientSize = new Size(693, 532);
-            Controls.Add(labelProgramFolder);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(consoleBox);
-            Controls.Add(menuStrip1);
-            Icon = ((Icon)(resources.GetObject("$Icon")));
-            MainMenuStrip = menuStrip1;
-            Name = "Program";
-            Text = "Skypelogger";
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
-            ResumeLayout(false);
-            PerformLayout();
+            this.ClientSize = new System.Drawing.Size(693, 532);
+            this.Controls.Add(this.labelProgramFolder);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.consoleBox);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "Program";
+            this.Text = "Skypelogger";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -464,7 +474,14 @@ namespace Skypelogger
         {
             Connect();
         }
-        
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var settings = new SettingsForm();
+            settings.ShowDialog();
+            this.Show();
+        }
     }
 
     delegate void SetTextCallback(string text);
