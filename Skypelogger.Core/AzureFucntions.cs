@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Skypelogger.Core.Models;
 using System;
 using System.Net.Http;
 using System.Text;

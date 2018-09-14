@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
+using Skypelogger.Core.Models;
 
 //[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace Skypelogger.Core

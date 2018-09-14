@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E88C70EE-3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skypelogger.test.functions", "Skypelogger.test.functions\Skypelogger.test.functions.csproj", "{019B167A-2AAB-4621-8DE4-DD0E837EBE4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skypelogger.Core.Models", "Skypelogger.Core.Models\Skypelogger.Core.Models.csproj", "{EE4BD8AD-FB49-49DF-B23F-7918783F6374}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,22 @@ Global
 		{019B167A-2AAB-4621-8DE4-DD0E837EBE4B}.Release|x64.Build.0 = Release|Any CPU
 		{019B167A-2AAB-4621-8DE4-DD0E837EBE4B}.Release|x86.ActiveCfg = Release|Any CPU
 		{019B167A-2AAB-4621-8DE4-DD0E837EBE4B}.Release|x86.Build.0 = Release|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Debug|ARM.Build.0 = Debug|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Debug|x64.Build.0 = Debug|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Debug|x86.Build.0 = Debug|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Release|ARM.ActiveCfg = Release|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Release|ARM.Build.0 = Release|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Release|x64.ActiveCfg = Release|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Release|x64.Build.0 = Release|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +105,7 @@ Global
 		{A7C1C2E3-D413-478D-BDE2-635D7B299232} = {8BCDEC02-41F5-4D99-8735-A3D53BCA6D34}
 		{F9DB7265-FA44-4FE8-8BE2-078E181AD27D} = {A7C1C2E3-D413-478D-BDE2-635D7B299232}
 		{019B167A-2AAB-4621-8DE4-DD0E837EBE4B} = {E88C70EE-3CC8-4EBD-8252-6B4477113A3B}
+		{EE4BD8AD-FB49-49DF-B23F-7918783F6374} = {A7C1C2E3-D413-478D-BDE2-635D7B299232}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {053009E4-A271-4811-8912-7F9DB017A87E}

@@ -5,14 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WindowsAzure.Storage" Version="9.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Skypelogger.Core.Models\Skypelogger.Core.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="Microsoft.Lync.Model">
       <HintPath>..\dll\Microsoft.Lync.Model.dll</HintPath>
     </Reference>

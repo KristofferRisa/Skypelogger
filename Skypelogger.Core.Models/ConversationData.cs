@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Lync.Model.Conversation;
 
-namespace Skypelogger.Core
-{ 
+namespace Skypelogger.Core.Models
+{
     public class ConversationData
     {
         public Guid Id { get; set; }
