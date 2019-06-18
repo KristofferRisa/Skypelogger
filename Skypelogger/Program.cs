@@ -26,16 +26,7 @@ namespace Skypelogger
             labelProgramFolder.Click += new EventHandler(OpenFolder);
         }     
 
-        private void OpenFolder(object sender, EventArgs e)
-        {
-             Process.Start(mydocpath + programFolder);
-            
-        }
-
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        static Dictionary<Conversation, ConversationContainer> ActiveConversations =
-            new Dictionary<Conversation, ConversationContainer>();
+        
 
         /**
          * user (participant) using the lync
@@ -50,12 +41,15 @@ namespace Skypelogger
         static string programFolder = @"\Skypelog";
         static LyncClient client;
 
-        static Program ProgramRef;
+        static Dictionary<Conversation, ConversationContainer> ActiveConversations =
+            new Dictionary<Conversation, ConversationContainer>();
+
         static Timer keepAliveTimer = new Timer();
 
         #region private fields
         private NotifyIcon notifyIcon;
         private System.ComponentModel.IContainer components;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const int BALLOON_POPUP_TIMEOUT_MS = 3000;
         private const int KEEP_ALIVE_INTERVAL_MS = 5000;
@@ -71,6 +65,8 @@ namespace Skypelogger
         private ToolStripMenuItem reconnectToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private const int CONNECT_RETRY_MAX = -1; // -1 to retry indefinitely
+
+        public static Program ProgramRef { get; private set; }
         #endregion
 
         static void Main(string[] args)
@@ -295,6 +291,54 @@ namespace Skypelogger
             }
         }
 
+       
+        private void Form_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                notifyIcon.Visible = true;
+                notifyIcon.BalloonTipText = "Skypelogger minimized";
+                notifyIcon.ShowBalloonTip(BALLOON_POPUP_TIMEOUT_MS);
+                ShowInTaskbar = false;
+            }
+        }
+
+        private void notifyIcon_MouseDoubleClick(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Normal;
+            ShowInTaskbar = true;
+            notifyIcon.Visible = false;
+        }
+
+        private void configToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hide();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void reconnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Connect();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var settings = new SettingsForm();
+            settings.ShowDialog();
+            this.Show();
+        }
+
+        private void OpenFolder(object sender, EventArgs e)
+        {
+            Process.Start(mydocpath + programFolder);
+
+        }
+
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -315,8 +359,8 @@ namespace Skypelogger
             // 
             // consoleBox
             // 
-            this.consoleBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.consoleBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.consoleBox.Location = new System.Drawing.Point(12, 216);
             this.consoleBox.Multiline = true;
@@ -442,47 +486,8 @@ namespace Skypelogger
 
         }
 
-        private void Form_Resize(object sender, EventArgs e)
-        {
-            if (WindowState == FormWindowState.Minimized)
-            {
-                notifyIcon.Visible = true;
-                notifyIcon.BalloonTipText = "Skypelogger minimized";
-                notifyIcon.ShowBalloonTip(BALLOON_POPUP_TIMEOUT_MS);
-                ShowInTaskbar = false;
-            }
-        }
-
-        private void notifyIcon_MouseDoubleClick(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Normal;
-            ShowInTaskbar = true;
-            notifyIcon.Visible = false;
-        }
-
-        private void configToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Hide();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void reconnectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Connect();
-        }
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            var settings = new SettingsForm();
-            settings.ShowDialog();
-            this.Show();
-        }
     }
 
     delegate void SetTextCallback(string text);
+
 }
